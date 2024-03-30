@@ -16,7 +16,7 @@ defmodule Auth2024Web.HiWidgetLive do
   end
 
   @spec mount_(any(), nil | maybe_improper_list() | map(), any()) :: {:ok, any()}
-  def mount_(params, session, socket) do
+  def mount_(_params, session, socket) do
     with token when is_bitstring(token) <- session["user_token"],
       user when not is_nil(user) <- Auth2024.Accounts.get_user_by_session_token(token) do
       {:ok, assign(socket, current_user: user)}
