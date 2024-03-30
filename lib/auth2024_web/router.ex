@@ -2,6 +2,7 @@ defmodule Auth2024Web.Router do
   use Auth2024Web, :router
 
   import Auth2024Web.UserAuth
+  import Auth2024Web.GithubAuth, only: [fetch_github_user: 2]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -11,6 +12,7 @@ defmodule Auth2024Web.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+    plug :fetch_github_user
   end
 
   pipeline :api do
@@ -82,6 +84,12 @@ defmodule Auth2024Web.Router do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
     end
+  end
+
+  scope "/auth/github", Auth2024Web do
+    pipe_through [:browser]
+    get "/", GithubAuthController, :request
+    get "/callback", GithubAuthController, :callback
   end
 
 end

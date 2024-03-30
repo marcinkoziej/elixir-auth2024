@@ -58,7 +58,8 @@ defmodule Auth2024.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.2"}
+      {:bandit, "~> 1.2"},
+      {:assent, "~> 0.2.9"}
     ]
   end
 
