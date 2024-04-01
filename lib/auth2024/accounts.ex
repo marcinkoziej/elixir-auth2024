@@ -26,6 +26,17 @@ defmodule Auth2024.Accounts do
     Repo.get_by(User, email: email)
   end
 
+  def get_user_by_email_or_register(email) when is_binary(email) do
+    case Repo.get_by(User, email: email) do
+      nil ->
+        # user needs some password, lets generate it and not tell them.
+        pw = :rand.bytes(30) |> Base.encode64(padding: false)
+        {:ok, user} = register_user(%{email: email, password: pw})
+        user
+      user -> user
+    end
+  end
+
   @doc """
   Gets a user by email and password.
 

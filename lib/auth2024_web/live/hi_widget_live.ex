@@ -1,8 +1,8 @@
 defmodule Auth2024Web.HiWidgetLive do
   use Auth2024Web, :live_view
 
-  # on_mount {Auth2024Web.UserAuth, :mount_current_user}
-  on_mount {Auth2024Web.GithubAuth, :mount_current_user}
+  on_mount {Auth2024Web.UserAuth, :mount_current_user}
+  # on_mount {Auth2024Web.GithubAuth, :mount_current_user}
 
   def render(assigns) do
     if assigns[:current_user] do
